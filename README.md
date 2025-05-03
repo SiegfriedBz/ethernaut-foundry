@@ -68,7 +68,7 @@ forge script script/FallbackScript.s.sol \
  --broadcast
 ```
 
-🌱 Branch Structure
+🌱 **Branch Structure**  
 Each branch in this repository corresponds to a specific Ethernaut challenge. Every branch contains:
 
 The Ethernaut contract for the challenge
