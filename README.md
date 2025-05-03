@@ -2,7 +2,7 @@
 
 This repository contains my personal solutions to the [Ethernaut](https://ethernaut.openzeppelin.com/) smart contract security challenges, implemented using [Foundry](https://book.getfoundry.sh/).
 
-Each challenge has its own script in the script/ directory, where I write and execute the exploit against a deployed Ethernaut challenge instance.
+Each branch contains a specific Ethernaut contract along with its associated solution script in the script/ directory, where I write and execute the exploit against a deployed Ethernaut challenge instance.
 
 ---
 
@@ -67,3 +67,10 @@ forge script script/FallbackScript.s.sol \
  --rpc-url $ALCHEMY_SEPOLIA_RPC_URL \
  --broadcast
 ```
+
+🌱 **Branch Structure**  
+Each branch in this repository corresponds to a specific Ethernaut challenge. Every branch contains:
+
+The Ethernaut contract for the challenge
+
+The script inside the script/ folder with the solution/exploit
