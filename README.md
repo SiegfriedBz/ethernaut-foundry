@@ -1,66 +1,69 @@
-## Foundry
+# 🧠 Ethernaut Challenge Solutions (Foundry)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains my personal solutions to the [Ethernaut](https://ethernaut.openzeppelin.com/) smart contract security challenges, implemented using [Foundry](https://book.getfoundry.sh/).
 
-Foundry consists of:
+Each challenge has its own script in the script/ directory, where I write and execute the exploit against a deployed Ethernaut challenge instance.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## ⚙️ Setup
 
-https://book.getfoundry.sh/
+### 1. 📄 Configure Environment Variables
 
-## Usage
+Start by copying the example .env file:
 
-### Build
-
-```shell
-$ forge build
+```bash
+cp .env.example .env
 ```
 
-### Test
+Then fill in your own values in .env:
 
-```shell
-$ forge test
+```bash
+ALCHEMY_SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/your_key_here
+ETHERSCAN_KEY=your_etherscan_api_key_here
+PRIVATE_KEY=0x...your_private_key_here
 ```
 
-### Format
+🔐 Do not commit .env — it contains sensitive keys!
 
-```shell
-$ forge fmt
+## 🚀 Running Challenge Scripts
+
+### 2. ✅ Simulate an Exploit (Dry Run)
+
+Run the script locally to test without sending transactions:
+
+```bash
+source .env
+forge script script/<YourScriptFile>.s.sol \
+ --tc <TargetContractName> \
+ --rpc-url $ALCHEMY_SEPOLIA_RPC_URL
 ```
 
-### Gas Snapshots
+<YourScriptFile>: name of the script file (e.g. FallbackScript)
+<TargetContractName>: the contract in that script file containing the logic
 
-```shell
-$ forge snapshot
+ℹ️ Use the --tc (--target-contract) flag when the script file contains multiple contracts.
+
+### 3. 📡 Broadcast the Exploit (Send to Sepolia)
+
+Send the transaction to the Sepolia testnet:
+
+```bash
+source .env
+forge script script/<YourScriptFile>.s.sol \
+ --tc <TargetContractName> \
+ --rpc-url $ALCHEMY_SEPOLIA_RPC_URL \
+ --broadcast
 ```
 
-### Anvil
+Make sure your Sepolia wallet has test ETH.
 
-```shell
-$ anvil
-```
+🧪 Example
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+```bash
+source .env
+forge script script/FallbackScript.s.sol \
+ --tc FallbackScript \
+ --rpc-url $ALCHEMY_SEPOLIA_RPC_URL \
+ --broadcast
 ```
