@@ -19,9 +19,9 @@ pragma solidity ^0.8.0;
  */
 contract Preservation {
     // public library contracts
-    address public timeZone1Library;
-    address public timeZone2Library;
-    address public owner;
+    address public timeZone1Library; // slot 0
+    address public timeZone2Library; // slot 1
+    address public owner; // slot 2
     uint256 storedTime;
     // Sets the function signature for delegatecall
     bytes4 constant setTimeSignature = bytes4(keccak256("setTime(uint256)"));
@@ -46,7 +46,8 @@ contract Preservation {
 // Simple library contract to set the time
 contract LibraryContract {
     // stores a timestamp
-    uint256 storedTime;
+    uint256 storedTime; // slot 0
+    // => maps to Preservation storage slot 0 : address public timeZone1Library;
 
     function setTime(uint256 _time) public {
         storedTime = _time;
