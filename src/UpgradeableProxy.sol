@@ -19,8 +19,6 @@ import "./Address.sol";
  * {TransparentUpgradeableProxy}.
  */
 contract UpgradeableProxy is Proxy {
-    using Address for address; // !! added to fix
-
     /**
      * @dev Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
      *
